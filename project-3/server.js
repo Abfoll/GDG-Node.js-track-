@@ -1,28 +1,22 @@
 const express = require("express");
-//const connectDB = require("./config/db");
-const authRoutes = require("./routes/auth");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
 require("dotenv").config();
 
+const authRoutes = require("./routes/auth");
+
 const app = express();
-
-// Connect to the database
-//connectDB();
-
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Routes
+// Use Auth Routes
 app.use("/api/auth", authRoutes);
 
-// Root route (optional for testing)
+// Root Route for Testing
 app.get("/", (req, res) => {
-    res.send("API is running...");
+  res.send("API is running...");
 });
 
-// Start server
+// Start Server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
